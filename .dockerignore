@@ -1,0 +1,5 @@
+node_modules
+config.json
+yarn.lock
+pnpm-lock.yaml
+package-lock.json

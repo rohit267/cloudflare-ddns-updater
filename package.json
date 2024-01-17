@@ -1,0 +1,17 @@
+{
+  "name": "cloudflare-dns-updater",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "rohitmahto267@gmail.com <Rohit Mahto>",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.5",
+    "nodemon": "^3.0.2"
+  }
+}
