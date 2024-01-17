@@ -1,5 +1,6 @@
 # Cloudflare DNS Updater
 Simple Node.js Service to check and update your Cloudfalre DNS records whenever your IP Adreess changes.
+It will check for your ip address in Cloudfalre and your current ip and update it as provied in fixed intervals.
 
 ## Features:
 - Supports for `A` and `AAAA`
