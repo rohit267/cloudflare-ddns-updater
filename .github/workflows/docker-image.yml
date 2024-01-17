@@ -24,5 +24,5 @@ jobs:
 
     - name: Build the Docker image
       run:
-        docker build . --tag ghcr.io/<your-GitHub-username>/store:${{github.sha}}
-        docker push ghcr.io/<your-GitHub-username>/store:${{github.sha}}
+        docker build . --tag ghcr.io/rohit267/cloudfalre-node-ddns:${{github.sha}}
+        docker push ghcr.io/rohit267/cloudfalre-node-ddns:${{github.sha}}
