@@ -23,6 +23,6 @@ jobs:
         password: ${{secrets.GITHUB_TOKEN}}
 
     - name: Build the Docker image
-      run:
+      run: |
         docker build . --tag ghcr.io/rohit267/cloudfalre-node-ddns:${{github.sha}}
         docker push ghcr.io/rohit267/cloudfalre-node-ddns:${{github.sha}}
