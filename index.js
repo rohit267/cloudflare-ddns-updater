@@ -15,7 +15,7 @@ async function getPublicIp(v = 4) {
         const ip = response.data.ip;
         return ip;
     } catch (error) {
-        console.error("Failed to get public IP", error.message);
+        console.error("Failed to get public IP", error);
         return null;
     }
 }
@@ -57,7 +57,7 @@ async function updateRecord(
 ) {
     const { auth } = require("./config.json");
     try {
-        const response = await axios.patch(
+        await axios.patch(
             `https://api.cloudflare.com/client/v4/zones/${zoneIdentifier}/dns_records/${recordIdentifier}`,
             {
                 content: ip,
@@ -75,14 +75,14 @@ async function updateRecord(
         );
         return true;
     } catch (error) {
-        console.error("Failed to update record", error.message);
+        console.error("Failed to update record", error);
         return false;
     }
 }
 
 async function startUpdate() {
     console.log("Starting cycle");
-    const { auth, records } = require("./config.json");
+    const { records } = require("./config.json");
 
     for (let i = 0; i < records.length; i++) {
         const { name, proxied, type, zoneId } = records[i];
@@ -103,7 +103,7 @@ async function startUpdate() {
         }
         const result = await updateRecord(zoneId, recordData.id, ip, proxied);
         if (!result) {
-            console.error("Failed to update record for record", record);
+            console.error("Failed to update record for record", records[i]);
             continue;
         }
         console.log("Updated record", recordData.name, recordData.content, ip);
