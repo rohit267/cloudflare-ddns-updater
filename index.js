@@ -43,7 +43,8 @@ async function getRecord(zoneIdentifier, recordName, v = "A") {
         }
         return response.data.result[0];
     } catch (error) {
-        console.error("Failed to get record", error);
+        console.error("Failed to get record", error.message);
+        console.error(JSON.stringify(error?.response?.data, null, 2));
         return null;
     }
 }
@@ -75,7 +76,8 @@ async function updateRecord(
         );
         return true;
     } catch (error) {
-        console.error("Failed to update record", error);
+        console.error("Failed to update record", error.message);
+        console.error(JSON.stringify(error?.response?.data, null, 2));
         return false;
     }
 }
@@ -86,21 +88,30 @@ async function startUpdate() {
 
     for (let i = 0; i < records.length; i++) {
         const { name, proxied, type, zoneId } = records[i];
+        console.log("Updating record", name);
 
+        console.log("Fetching public IP...");
         const ip = await getPublicIp(type == "AAAA" ? 6 : 4);
         if (!ip) {
             console.error("Failed to get public IP");
             continue;
         }
+        console.log("Public IP is", ip);
+
+        console.log("Fetching record...");
         const recordData = await getRecord(zoneId, name, type);
         if (!recordData) {
             console.error("Failed to get record for record", name);
             continue;
         }
+        console.log("Record IP is", recordData.content);
         if (recordData.content == ip) {
             console.log("IP has not changed for record", name);
             continue;
         }
+        console.log("IP has changed for record", name);
+
+        console.log("Updating record...");
         const result = await updateRecord(zoneId, recordData.id, ip, proxied);
         if (!result) {
             console.error("Failed to update record for record", records[i]);
