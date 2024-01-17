@@ -24,7 +24,8 @@ Make a config.json file with all info (in root dir of app).
             "zoneId":"ZONE_ID_OF_DOMAIN"
         }
     ],
-    "internalInMinutes": 5
+    // In minutes
+    "interval": 5
 }
 ```
 ### Docker Compose
