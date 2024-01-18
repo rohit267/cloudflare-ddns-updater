@@ -39,15 +39,6 @@ services:
     restart: unless-stopped
     volumes:
       - ./config.json:/app/config.json
-    version: '3'
-
-services:
-  cloudfalre-updater:
-    image: ghcr.io/rohit267/cloudfalre-node-ddns:latest
-    container_name: cloudfalre-updater
-    restart: unless-stopped
-    volumes:
-      - ./config.json:/app/config.json
     network_mode: "host"
 
 ```
