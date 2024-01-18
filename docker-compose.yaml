@@ -7,3 +7,4 @@ services:
     restart: unless-stopped
     volumes:
       - ./config.json:/app/config.json
+    network_mode: "host"
