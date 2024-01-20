@@ -8,7 +8,7 @@ It will check for your ip address in Cloudfalre and your current ip and update i
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=rohit267/cloudflare-dns-updater&type=Date)](https://star-history.com/#rohit267/cloudflare-dns-updater&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=rohit267/cloudflare-dns-updater&type=Timeline)](https://star-history.com/#rohit267/cloudflare-dns-updater&Timeline)
 
 
 ## Usage:
