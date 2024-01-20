@@ -6,6 +6,11 @@ It will check for your ip address in Cloudfalre and your current ip and update i
 - Supports for `A` and `AAAA`
 - Depends on `https://www.ipify.org/`
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=rohit267/cloudflare-dns-updater&type=Date)](https://star-history.com/#rohit267/cloudflare-dns-updater&Date)
+
+
 ## Usage:
 Make a config.json file with all info (in root dir of app).
 ```json
