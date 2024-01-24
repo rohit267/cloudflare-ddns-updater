@@ -26,5 +26,5 @@ jobs:
 
     - name: Build the Docker image
       run: |
-        docker build . --tag ghcr.io/rohit267/cloudfalre-node-ddns:latest --tag ghcr.io/rohit267/cloudfalre-node-ddns:${GITHUB_SHA::7}
-        docker push ghcr.io/rohit267/cloudfalre-node-ddns:latest
+        docker build . --tag ghcr.io/rohit267/cloudflare-node-ddns:latest --tag ghcr.io/rohit267/cloudflare-node-ddns:${GITHUB_SHA::7}
+        docker push ghcr.io/rohit267/cloudflare-node-ddns:latest
