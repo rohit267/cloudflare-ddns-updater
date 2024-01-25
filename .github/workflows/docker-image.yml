@@ -16,7 +16,7 @@ jobs:
       packages: write
     steps:
     - uses: actions/checkout@v3
-
+    - uses: nyaa8/package-version@v1
     - name: 'Login to GitHub Container Registry'
       uses: docker/login-action@v1
       with:
@@ -26,5 +26,6 @@ jobs:
 
     - name: Build the Docker image
       run: |
-        docker build . --tag ghcr.io/rohit267/cloudflare-node-ddns:latest --tag ghcr.io/rohit267/cloudflare-node-ddns:${GITHUB_SHA::7}
+        docker build . -t ghcr.io/rohit267/cloudflare-node-ddns:${env.PACKAGE_VERSION} -t ghcr.io/rohit267/cloudflare-node-ddns:latest
+        docker push ghcr.io/rohit267/cloudflare-node-ddns:${env.PACKAGE_VERSION}
         docker push ghcr.io/rohit267/cloudflare-node-ddns:latest
