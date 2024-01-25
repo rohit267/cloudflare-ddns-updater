@@ -27,4 +27,4 @@ jobs:
     - name: Build the Docker image
       run: |
         docker build . --tag ghcr.io/rohit267/cloudflare-node-ddns:${{env.PACKAGE_VERSION}} --tag ghcr.io/rohit267/cloudflare-node-ddns:latest
-        docker push ghcr.io/rohit267/cloudflare-node-ddns:${{env.PACKAGE_VERSION}} ghcr.io/rohit267/cloudflare-node-ddns:latest
+        docker push ghcr.io/rohit267/cloudflare-node-ddns:${{env.PACKAGE_VERSION}}  --all-tags
