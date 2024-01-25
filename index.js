@@ -20,7 +20,6 @@ let counter = 1;
 
 async function getPublicIp(v = 4) {
     try {
-        console.log(`Getting public IPv${v} from cloudflare.com...`);
         const response = await axios.get(CLOUDFLARE_CDN_CGI_TRACE_URL, {
             httpsAgent: v == 4 ? v4Agemt : v6Agemt,
             timeout: 3000,
@@ -30,7 +29,6 @@ async function getPublicIp(v = 4) {
     } catch (error) {
         console.error("Failed to get public IP from cloudflare.com", error);
         try {
-            console.log("Getting public IP from ipify.org...");
             const url = v == 4 ? IPIFY_V4_API_URL : IPIFY_V6_API_URL;
             const response = await axios.get(url, { timeout: 3000 });
             const ip = response.data.ip;
@@ -65,8 +63,7 @@ async function getRecord(zoneIdentifier, recordName, v = "A") {
         }
         return response.data.result[0];
     } catch (error) {
-        console.error("Failed to get record", error.message);
-        console.error(JSON.stringify(error?.response?.data, null, 2));
+        console.error("Failed to get record", error);
         return null;
     }
 }
@@ -98,41 +95,33 @@ async function updateRecord(
         );
         return true;
     } catch (error) {
-        console.error("Failed to update record", error.message);
-        console.error(JSON.stringify(error?.response?.data, null, 2));
+        console.error("Failed to update record", error);
         return false;
     }
 }
 
 async function startUpdate() {
     IN_PROGRESS = true;
-    console.log("Starting cycle");
     const { records } = require("./config.json");
     const results = [];
     for (let i = 0; i < records.length; i++) {
         const { name, proxied, type, zoneId } = records[i];
-        console.log("Updating record", name);
-
-        console.log("Fetching public IP...");
         const ip = await getPublicIp(type == "AAAA" ? 6 : 4);
         if (!ip) {
             console.error("Failed to get public IP");
             results.push(false);
             continue;
         }
-        console.log("Public IP is", ip);
 
-        console.log("Fetching record...");
         const recordData = await getRecord(zoneId, name, type);
         if (!recordData) {
             console.error("Failed to get record for record", name);
             results.push(false);
             continue;
         }
-        console.log("Record IP is", recordData.content);
+        
         RECORDS_IP[`${name}-${type}`] = recordData.content;
         if (recordData.content == ip) {
-            console.log("IP has not changed for record", name);
             results.push(true);
             continue;
         }
@@ -160,7 +149,6 @@ async function startUpdate() {
         results.push(true);
     }
     IN_PROGRESS = false;
-    console.log("Cycle complete");
     return results;
 }
 
@@ -197,13 +185,8 @@ const interval = setInterval(async () => {
         } else {
             currentIPv4 = ipv4;
             currentIPv6 = ipv6;
-            console.log("Updated all records");
         }
-    } else {
-        console.log("Nothing changed");
     }
-
-    
 }, 15 * 1000);
 
 console.log("Service started");
