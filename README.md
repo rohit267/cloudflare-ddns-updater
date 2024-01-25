@@ -3,7 +3,7 @@ Simple Node.js Service will update your Cloudflare DNS records whenever your IP 
 It will check for your ip address in Cloudflare and your current ip and update it as provied in fixed intervals.
 
 ## Features:
-- Supports for IPv4 (`A`) & IPv6 (`AAAA`).
+- Supports both IPv4 (`A`) & IPv6 (`AAAA`).
 - Depends on  `https://cloudflare.com/cdn-cgi/trace` & `https://www.ipify.org/`
 
 ## Star History
