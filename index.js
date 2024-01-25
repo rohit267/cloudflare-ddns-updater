@@ -169,7 +169,7 @@ const interval = setInterval(async () => {
      * Every 4th cycle, we force update all records
      */
     if (counter % 4 == 0) {
-        counter = 0;
+        counter = 1;
         !IN_PROGRESS && startUpdate();
         return;
     }
